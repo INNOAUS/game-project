@@ -24,31 +24,6 @@ public class MainThread extends Thread {
         this.gamePanel = gamePanel;
     }
 
-    /*@Override
-    public synchronized void start() {
-        super.start();
-        Log.d("Main", "@start");
-        Runnable runnable = new Runnable() {
-            @Override
-            public synchronized void run() {
-                while(true) {
-
-
-
-                    gamePanel.update();
-
-                    try {
-                        wait(30);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-        };
-        Handler handler = new Handler();
-        handler.post(runnable);
-    }*/
 
     @Override
     public void run() {
