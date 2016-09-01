@@ -53,7 +53,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                 thread.setRunning(false);
                 thread.join();
                 retry = false;
-            } catch (InterruptedException e) {e.printStackTrace();}
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -108,17 +110,29 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         thread.start();
     }
 
+    public void startGame() {
+        if (!player.getPlaying()) {
+            if (createNewGame) {
+                newGame();
+            }
+            player.setPlaying(true);
+            createNewGame = false;
+        }
+    }
+
     //needs modification
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             if (!player.getPlaying()) {
+                return false;
+                /*
                 if (createNewGame) {
                     newGame();
                 }
-                parent.startGame();
                 player.setPlaying(true);
                 createNewGame = false;
+                */
             } else if (player.getCollision()) {
                 player.jump();
             }

@@ -11,12 +11,21 @@
         android:layout_height="fill_parent"
         android:orientation="vertical" />
 
-    <TextView
-        android:id="@+id/text_score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:textSize="40sp" />
+    <RelativeLayout
+        android:id="@+id/layout_gamepanel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/text_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/scorebg"
+            android:textColor="#fff"
+            android:textSize="40sp" />
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/layout_start"
@@ -28,6 +37,7 @@
             android:layout_height="match_parent"
             android:scaleType="fitXY"
             android:src="@drawable/homebg" />
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,27 +45,85 @@
             android:layout_marginTop="50dp"
             android:src="@drawable/title" />
 
-        <ImageButton
-            android:id="@+id/button_start"
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="50dp"
-            android:background="@drawable/drawable_button_start" />
+            android:layout_marginBottom="50dp">
+
+            <ImageButton
+                android:id="@+id/button_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/drawable_button_start" />
+
+            <TextView
+                android:id="@+id/text_startbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="START"
+                android:textColor="#fff"
+                android:textSize="20sp" />
+        </RelativeLayout>
+
 
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/layout_gameover"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/blacktransbg">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            android:src="@drawable/blacktransbg" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="203dp"
+                android:layout_height="346dp"
+                android:layout_marginBottom="30dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/scorepanel" />
+
+                <TextView
+                    android:id="@+id/text_finalscore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="115dp"
+                    android:text="333"
+                    android:textColor="#fff"
+                    android:textSize="34sp" />
+
+                <TextView
+                    android:id="@+id/text_finalhighscore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="65dp"
+                    android:text="333"
+                    android:textColor="#fff"
+                    android:textSize="34sp" />
+            </RelativeLayout>
+
+            <ImageButton
+                android:id="@+id/button_retry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/drawable_button_retry" />
+        </LinearLayout>
+
 
     </RelativeLayout>
 

@@ -2,25 +2,29 @@ package com.innoaus.thetower;
 
 import android.app.Activity;
 import android.graphics.Typeface;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Game extends Activity {
+public class Game extends Activity implements View.OnClickListener {
     private boolean playing;
-    private TextView tvScore;
-    private ImageButton btnStart;
+
     private ViewGroup viewGroupStart;
+    private ViewGroup viewGroupGamePanel;
     private ViewGroup viewGroupGameOver;
+    private GamePanel gamePanel;
+
+    private ImageButton btnStart;
+    private ImageButton btnRetry;
+    private TextView tvGamePanelScore;
+    private TextView tvFinalScore;
+    private TextView tvFinalHighScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,31 +40,39 @@ public class Game extends Activity {
         setContentView(R.layout.activity_game);
 
         viewGroupStart = (ViewGroup) findViewById(R.id.layout_start);
+        viewGroupGamePanel = (ViewGroup) findViewById(R.id.layout_gamepanel);
         viewGroupGameOver = (ViewGroup) findViewById(R.id.layout_gameover);
-        viewGroupStart.setVisibility(View.VISIBLE);
-        viewGroupGameOver.setVisibility(View.INVISIBLE);
-        btnStart = (ImageButton) findViewById(R.id.button_start);
-        btnStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
 
+        viewGroupStart.setVisibility(View.VISIBLE);
+        viewGroupGamePanel.setVisibility(View.GONE);
+        viewGroupGameOver.setVisibility(View.GONE);
+
+        btnStart = (ImageButton) findViewById(R.id.button_start);
+        btnStart.setOnClickListener(this);
+        btnRetry = (ImageButton) findViewById(R.id.button_retry);
+        btnRetry.setOnClickListener(this);
 
         Typeface face = Typeface.createFromAsset(getAssets(), "font/TFPironv2.otf");
-        tvScore = (TextView) findViewById(R.id.text_score);
-        tvScore.setTypeface(face);
+        TextView tvStartButton = (TextView) findViewById(R.id.text_startbutton);
+        tvStartButton.setTypeface(face);
+        tvGamePanelScore = (TextView) findViewById(R.id.text_score);
+        tvGamePanelScore.setTypeface(face);
+        tvFinalScore = (TextView) findViewById(R.id.text_finalscore);
+        tvFinalScore.setTypeface(face);
+        tvFinalHighScore = (TextView) findViewById(R.id.text_finalhighscore);
+        tvFinalHighScore.setTypeface(face);
 
         FrameLayout frame = (FrameLayout) findViewById(R.id.surfaceframe);
-        GamePanel gamePanel = new GamePanel(this);
+        gamePanel = new GamePanel(this);
         frame.addView(gamePanel);
     }
 
     public void startGame() {
-        playing = true;
-        tvScore.setVisibility(View.INVISIBLE); //test
-        viewGroupStart.setVisibility(View.INVISIBLE);
-        viewGroupGameOver.setVisibility(View.INVISIBLE);
+        gamePanel.startGame();
+
+        viewGroupStart.setVisibility(View.GONE);
+        viewGroupGamePanel.setVisibility(View.VISIBLE);
+        tvGamePanelScore.setText(String.format("%d", 222)); //display integer
     }
 
     public void stopGame() {
@@ -68,13 +80,31 @@ public class Game extends Activity {
         runOnUiThread(runnableStop);
     }
 
+    private void home() {
+        viewGroupStart.setVisibility(View.VISIBLE);
+        viewGroupGameOver.setVisibility(View.GONE);
+    }
+
     Runnable runnableStop = new Runnable() {
         @Override
         public void run() {
-            tvScore.setVisibility(View.VISIBLE); //test
-            Toast.makeText(Game.this, "Game Over", Toast.LENGTH_SHORT).show(); //test
-
             viewGroupGameOver.setVisibility(View.VISIBLE);
+            viewGroupGamePanel.setVisibility(View.GONE);
+
+            tvFinalHighScore.setText("222");
+            tvFinalScore.setText("999");
         }
     };
+
+    @Override
+    public void onClick(View v) {
+        int vid = v.getId();
+        if (vid == R.id.button_retry) {
+            home();
+        } else if (vid == R.id.button_start) {
+            startGame();
+        }
+    }
+
+
 }
