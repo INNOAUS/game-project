@@ -13,9 +13,9 @@ public class Tower {
 
     public Tower(Bitmap res, int number) {
         image = res;
-        x = (GamePanel.WIDTH / 2) - 350;
+        x = (GamePanel.WIDTH / 2) - 88;
         forReset = number;
-        if (number == 1) {y = -512;} else y = -512 - GamePanel.HEIGHT;
+        if (number == 1) {y = -128;} else y = -128 - GamePanel.HEIGHT;
         dy = GamePanel.MOVESPEED;
     }
 
@@ -31,6 +31,6 @@ public class Tower {
     }
 
     public void reset() {
-        if (forReset == 1) {y = -512;} else y = -512 - GamePanel.HEIGHT;
+        if (forReset == 1) {y = -128;} else y = -128 - GamePanel.HEIGHT;
     }
 }

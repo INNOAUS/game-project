@@ -23,12 +23,12 @@ public class Pineapple extends GameObject {
         forResetY = y;
         this.left = left;
         forResetL = left;
-        height = 128;
-        width = 840;
+        height = 32;
+        width = 210;
         dy = GamePanel.MOVESPEED;
-        dx = GamePanel.MOVESPEED+2;
+        dx = GamePanel.MOVESPEED*2;
 
-        x = rand.nextInt(500) - 470;
+        x = rand.nextInt(125) - 116;
     }
 
     public Pineapple(Bitmap res, int x, int y, boolean left) {
@@ -39,10 +39,10 @@ public class Pineapple extends GameObject {
         forResetY = y;
         this.left = left;
         forResetL = left;
-        height = 128;
-        width = 840;
+        height = 32;
+        width = 210;
         dy = GamePanel.MOVESPEED;
-        dx = GamePanel.MOVESPEED+2;
+        dx = GamePanel.MOVESPEED*2;
     }
 
     public void collision(boolean b) {
@@ -51,19 +51,19 @@ public class Pineapple extends GameObject {
 
     public void update() {
         y += dy;
-        if(y >= 2496) {
-            y = -576;
+        if(y >= 624) {
+            y = -144;
             collision = false;
         }
         if(!collision) {
             if (left) {
                 x -= dx;
-                if (x <= -470) {
+                if (x <= -116) {
                     left = false;
                 }
             } else {
                 x += dx;
-                if (x >= 30) {
+                if (x >= 8) {
                     left = true;
                 }
             }
@@ -72,8 +72,8 @@ public class Pineapple extends GameObject {
 
     public void update(int x) {
         y+= dy;
-        if(y >= 2496) {
-            y = -576;
+        if(y >= 624) {
+            y = -144;
         }
             this.x = x;
     }
@@ -84,9 +84,17 @@ public class Pineapple extends GameObject {
         } catch (Exception e) {}
     }
 
+    public int resetFirst() {
+        y = forResetY;
+        x = 5;
+        left = forResetL;
+        collision = false;
+        return x;
+    }
+
     public int resetL() {
         y = forResetY;
-        x = rand.nextInt(500) - 470;
+        x = rand.nextInt(125) - 116;
         left = forResetL;
         collision = false;
         return x;
@@ -94,7 +102,7 @@ public class Pineapple extends GameObject {
 
     public void resetR(int x) {
         y = forResetY;
-        this.x = x + 1040;
+        this.x = x + 256;
         left = forResetL;
     }
 

@@ -14,8 +14,8 @@ public class Player extends GameObject {
     private boolean playing;
 
     public Player(Bitmap res, int w, int h) {
-        x = (GamePanel.WIDTH / 2) - 56;
-        y = 1212;
+        x = (GamePanel.WIDTH / 2) - 14;
+        y = 305;
         dy = 0;
         score = 0;
         height = h;
@@ -27,16 +27,20 @@ public class Player extends GameObject {
     public void jump() {
         jump = true;
         collision = false;
-        dy = 60;
+        dy = 15;
     }
 
-    public void collision(boolean collision) {
+    public void setCollision(boolean collision) {
         this.collision = collision;
+    }
+
+    public boolean getCollision() {
+        return collision;
     }
 
     //needs modification
     public void update() {
-        if(y > 2048) {
+        if(y > 512) {
             playing = false;
         }
 
@@ -46,7 +50,7 @@ public class Player extends GameObject {
 
         if (jump) {
             y -= dy;
-            dy -= 4;
+            dy -= 1;
         } else {
             y += GamePanel.MOVESPEED;
         }
@@ -65,7 +69,7 @@ public class Player extends GameObject {
     }
 
     public void reset() {
-        y = 1212;
+        y = 304;
         score = 0;
         jump = false;
     }

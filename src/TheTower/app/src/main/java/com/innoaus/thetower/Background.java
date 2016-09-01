@@ -17,16 +17,16 @@ public class Background {
         canvas.drawBitmap(image, 0, 0, null);
     }
 
-    public void drawbd1(Canvas canvas) {
-        canvas.drawBitmap(image, 0, 1620, null);
+    public void drawbd(Canvas canvas) {
+        canvas.drawBitmap(image, 0, 441, null);
     }
 
-    public void drawbd2(Canvas canvas) {
-        canvas.drawBitmap(image, 0, 1731, null);
+    public void drawlbg(Canvas canvas) {
+        canvas.drawBitmap(image, 0, 0, null);
     }
 
-    public void drawtbg(Canvas canvas) {
-        canvas.drawBitmap(image, (GamePanel.WIDTH / 2) - 350, 0, null);
+    public void drawrbg(Canvas canvas) {
+        canvas.drawBitmap(image, 288, 0, null);
     }
 
 }
