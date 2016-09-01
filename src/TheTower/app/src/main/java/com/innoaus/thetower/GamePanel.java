@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -137,7 +136,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             tower1.update();
             tower2.update();
             player.update();
-            Log.d("GameP", "play");
             for (int i = 0; i < 6; i++) {
                 pineappleL.get(i).update();
                 pineappleR.get(i).update(pineappleL.get(i).getX() + 256);
@@ -155,14 +153,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                         player.setCollision(true);
                         pineappleL.get(i).collision(true);
                     } else {
-                        Log.d("GameP", "stopgame");
                         parent.stopGame();
                         player.setPlaying(false);
                     }
                 }
             }
         } else {
-            Log.d("GameP", "else");
             createNewGame = true;
         }
 

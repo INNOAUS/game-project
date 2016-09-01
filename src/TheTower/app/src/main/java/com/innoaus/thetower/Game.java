@@ -6,15 +6,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Game extends Activity {
     private boolean playing;
-    TextView tvScore;
+    private TextView tvScore;
+    private ImageButton btnStart;
+    private ViewGroup viewGroupStart;
+    private ViewGroup viewGroupGameOver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +35,17 @@ public class Game extends Activity {
 
         setContentView(R.layout.activity_game);
 
-        //layout1 = (LinearLayout) findViewById(R.id.box1);
-        //layout2 = (LinearLayout) findViewById(R.id.box2);
+        viewGroupStart = (ViewGroup) findViewById(R.id.layout_start);
+        viewGroupGameOver = (ViewGroup) findViewById(R.id.layout_gameover);
+        viewGroupStart.setVisibility(View.VISIBLE);
+        viewGroupGameOver.setVisibility(View.INVISIBLE);
+        btnStart = (ImageButton) findViewById(R.id.button_start);
+        btnStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
+
 
         Typeface face = Typeface.createFromAsset(getAssets(), "font/TFPironv2.otf");
         tvScore = (TextView) findViewById(R.id.text_score);
@@ -43,12 +58,23 @@ public class Game extends Activity {
 
     public void startGame() {
         playing = true;
-        tvScore.setVisibility(View.INVISIBLE);
+        tvScore.setVisibility(View.INVISIBLE); //test
+        viewGroupStart.setVisibility(View.INVISIBLE);
+        viewGroupGameOver.setVisibility(View.INVISIBLE);
     }
 
     public void stopGame() {
         playing = false;
-        Log.d("Game", "aaa");
-        tvScore.setVisibility(View.VISIBLE);
+        runOnUiThread(runnableStop);
     }
+
+    Runnable runnableStop = new Runnable() {
+        @Override
+        public void run() {
+            tvScore.setVisibility(View.VISIBLE); //test
+            Toast.makeText(Game.this, "Game Over", Toast.LENGTH_SHORT).show(); //test
+
+            viewGroupGameOver.setVisibility(View.VISIBLE);
+        }
+    };
 }
